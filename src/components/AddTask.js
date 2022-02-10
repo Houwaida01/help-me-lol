@@ -1,20 +1,32 @@
-import React, { useRef } from 'react';
+import React, { useState } from 'react';
 import { useDispatch } from 'react-redux';
-import { Button } from 'semantic-ui-react'
-import { addTask } from '../redux/actions/Actions';
+import {InputGroup,FormControl,Button} from 'react-bootstrap'
+import { addTaask } from '../redux/actions/Actions';
+
 
 function AddTask() {
+    const [newTask, setNewTask] = useState({id:Math.random(),description:"",isDone:false});
     const dispatch=useDispatch()
-    const addRef=useRef()
     const handleAdd=()=>{
-        dispatch(addTask({description:addRef.current.value,id:Math.random(),isDone:false}))
-        addRef.current.value=""
+      dispatch(addTaask(newTask));
+     
     }
-    console.log(handleAdd);
+    console.log(newTask)
   return (
   <div>
-      <input type="text" placeholder="Add a new todo here" addRef={addRef} />
-      <Button onClick={()=>dispatch(handleAdd())} positive>Add</Button>
+     <h1>TO DO LIST</h1>
+        <InputGroup className="mb-3">
+           <FormControl
+           placeholder="What are you going to do"
+           onChange={e=>setNewTask({...newTask,description:e.target.value})}
+           aria-label="Task"
+           aria-describedby="basic-addon2"
+           
+           />
+      <Button variant="primary" onClick={()=>handleAdd()} id="button-addon2">
+            ADD TO MY TO DO LIST
+      </Button>
+      </InputGroup>
   </div>);
 }
 

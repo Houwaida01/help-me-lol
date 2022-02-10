@@ -1,32 +1,23 @@
 import React from 'react';
-import { Button, Card, Image } from 'semantic-ui-react'
-import Editing from './Editing';
-import EditTask from './Editing';
+import {Container,Row,Col} from 'react-bootstrap'
+import { useDispatch } from 'react-redux';
+import { DONE } from '../redux/actions/Actions';
+import Edit from './Edit';
 function Task({todo}) {
+  const dispatch=useDispatch()
   return (
   <div>
-<Card>
-      <Card.Content>
-        <Image
-          floated='right'
-          size='mini'
-          src='https://react.semantic-ui.com/images/avatar/large/steve.jpg'
-        />
-        <Card.Header>TODO LIST</Card.Header>
-        <Card.Meta>cities</Card.Meta>
-        <Card.Description>
-          {todo.description}
-        </Card.Description>
-      </Card.Content>
-      <Card.Content extra>
-        <div className='ui two buttons'>
-          <Editing Task={todo} />
-          <Button basic color='red'>
-            DONE
-          </Button>
-        </div>
-      </Card.Content>
-    </Card>
+    <Container>
+  <Row>
+    <Col style={{fontSize:'30px',color:"black"}}>{todo.description}</Col>
+    <Col> 
+      <div style={{display:"flex"}}>
+      <button style={{padding: '10px 20px', borderRadius: '8px', fontSize:'16px', width:'33%'}} onClick={()=>dispatch(DONE(todo.id))}>{todo.isDone?"Undone":"Done"}</button>
+      <Edit task={todo}/>
+      </div> 
+    </Col>
+  </Row>
+  </Container>
   </div>);
 }
 

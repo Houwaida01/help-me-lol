@@ -1,15 +1,15 @@
 import { ADD_TASK, DONE_TASK, EDIT_TASK } from "./ActionsType"
 
-export const addTask=(newTask)=>{
+export const addTaask=(newTask)=>{
     return{
         type:ADD_TASK,
         payload:newTask
     }
 }
-export const EditTask=(newDescription,id)=>{
+export const editTask=(newEdit,id)=>{
     return{
         type:EDIT_TASK,
-        payload:{newDescription,id}
+        payload:{newEdit,id}
     }
 }
 export const DONE=(id)=>{
